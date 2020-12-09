@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1、安装Node.js1https://nodejs.org/en/ 下载msi文件安装 2、安装openSDK1.8123451、访问：https://www.azul.com/downloads/zulu/zulu-windows/ 2、下载：https://cdn.azul.com/zulu/bin/zulu8.30.0.1-jdk8.0.172-win_x64.zip3、配置环境变量：新建">
+<meta name="keywords" content="Ionic,Cordova,Nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node.js+ionic+cordova移动混合开发环境部署">
+<meta property="og:url" content="http://yoursite.com/2018/06/21/node.js+ionic+cordova移动混合开发环境部署/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1、安装Node.js1https://nodejs.org/en/ 下载msi文件安装 2、安装openSDK1.8123451、访问：https://www.azul.com/downloads/zulu/zulu-windows/ 2、下载：https://cdn.azul.com/zulu/bin/zulu8.30.0.1-jdk8.0.172-win_x64.zip3、配置环境变量：新建">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-12-09T14:26:16.992Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="node.js+ionic+cordova移动混合开发环境部署">
+<meta name="twitter:description" content="1、安装Node.js1https://nodejs.org/en/ 下载msi文件安装 2、安装openSDK1.8123451、访问：https://www.azul.com/downloads/zulu/zulu-windows/ 2、下载：https://cdn.azul.com/zulu/bin/zulu8.30.0.1-jdk8.0.172-win_x64.zip3、配置环境变量：新建">
+
+<link rel="canonical" href="http://yoursite.com/2018/06/21/node.js+ionic+cordova移动混合开发环境部署/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>node.js+ionic+cordova移动混合开发环境部署 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/21/node.js+ionic+cordova移动混合开发环境部署/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Johnson">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          node.js+ionic+cordova移动混合开发环境部署
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-21 10:24:33" itemprop="dateCreated datePublished" datetime="2018-06-21T10:24:33+08:00">2018-06-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-09 22:26:16" itemprop="dateModified" datetime="2020-12-09T22:26:16+08:00">2020-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/移动混合开发/" itemprop="url" rel="index"><span itemprop="name">移动混合开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1、安装Node-js"><a href="#1、安装Node-js" class="headerlink" title="1、安装Node.js"></a>1、安装Node.js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://nodejs.org/en/ 下载msi文件安装</span><br></pre></td></tr></table></figure>
+<h2 id="2、安装openSDK1-8"><a href="#2、安装openSDK1-8" class="headerlink" title="2、安装openSDK1.8"></a>2、安装openSDK1.8</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1、访问：https://www.azul.com/downloads/zulu/zulu-windows/ </span><br><span class="line">2、下载：https://cdn.azul.com/zulu/bin/zulu8.30.0.1-jdk8.0.172-win_x64.zip</span><br><span class="line">3、配置环境变量：新建 JAVA_HOME 值为：D:\Java\jdk</span><br><span class="line">4、添加path： D:\Java\jdk</span><br><span class="line">5、添加path： D:\Java\jdk\bin</span><br></pre></td></tr></table></figure>
+<h2 id="3、更换国内npm镜像"><a href="#3、更换国内npm镜像" class="headerlink" title="3、更换国内npm镜像"></a>3、更换国内npm镜像</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、写入配置文件： npm config set registry http://r.cnpmjs.org/</span><br><span class="line">2、查看是否生效： npm config get registry</span><br></pre></td></tr></table></figure>
+<h2 id="4、修改node目录用户组机安装Ionic及其Cordova"><a href="#4、修改node目录用户组机安装Ionic及其Cordova" class="headerlink" title="4、修改node目录用户组机安装Ionic及其Cordova"></a>4、修改node目录用户组机安装Ionic及其Cordova</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Mac下node目录：/usr/local/lib/node_modules</span><br><span class="line">sudo chown -R johnson:staff  node_modules</span><br><span class="line">npm install -g ionic</span><br><span class="line">npm install -g cordova</span><br></pre></td></tr></table></figure>
+<h2 id="5、安装apache-ant"><a href="#5、安装apache-ant" class="headerlink" title="5、安装apache ant"></a>5、安装apache ant</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、下载地址： https://ant.apache.org/bindownload.cgi</span><br><span class="line">2、解压到： D:\Java\apache-ant-1.10.3</span><br><span class="line">3、添加环境变量：ANT_HOME 值为： D:\Java\apache-ant-1.10.3</span><br><span class="line">4、添加path:  %ANT_HOME%\bin</span><br></pre></td></tr></table></figure>
+<h2 id="6、安装Android-SDK"><a href="#6、安装Android-SDK" class="headerlink" title="6、安装Android SDK"></a>6、安装Android SDK</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、安装Android sdk到：D:\Java\Android\SDK</span><br><span class="line">2、添加环境变量： ANDROID_HOME 值为： D:\Java\Android\SDK</span><br><span class="line">3、添加path： %ANDROID_HOME%\tools</span><br><span class="line">4、添加path： %ANDROID_HOME%\platform-tools</span><br></pre></td></tr></table></figure>
+<h2 id="7、新建第一个测试项目"><a href="#7、新建第一个测试项目" class="headerlink" title="7、新建第一个测试项目"></a>7、新建第一个测试项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、检查环境开发环境： ionic info</span><br><span class="line">2、切换到项目目录</span><br><span class="line">3、新建demo项目：ionic start demo</span><br><span class="line">4、添加编译为Android版本： ionic cordova platform add android</span><br><span class="line">5、编译：ionic build android</span><br><span class="line">6、web端测试：ionic serve</span><br><span class="line">7、运行在Android运行：ionic cordova run android</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Ionic/" rel="tag"># Ionic</a>
+              <a href="/tags/Cordova/" rel="tag"># Cordova</a>
+              <a href="/tags/Nodejs/" rel="tag"># Nodejs</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/05/02/CentOs7下部署Ngrok服务器/" rel="prev" title="CentOs7下部署Ngrok服务器">
+      <i class="fa fa-chevron-left"></i> CentOs7下部署Ngrok服务器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/06/23/CentOS7 挂载本地光盘作为镜像源（Yum）/" rel="next" title="CentOS7 挂载本地光盘作为镜像源">
+      CentOS7 挂载本地光盘作为镜像源 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、安装Node-js"><span class="nav-number">1.</span> <span class="nav-text">1、安装Node.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、安装openSDK1-8"><span class="nav-number">2.</span> <span class="nav-text">2、安装openSDK1.8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、更换国内npm镜像"><span class="nav-number">3.</span> <span class="nav-text">3、更换国内npm镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、修改node目录用户组机安装Ionic及其Cordova"><span class="nav-number">4.</span> <span class="nav-text">4、修改node目录用户组机安装Ionic及其Cordova</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、安装apache-ant"><span class="nav-number">5.</span> <span class="nav-text">5、安装apache ant</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、安装Android-SDK"><span class="nav-number">6.</span> <span class="nav-text">6、安装Android SDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、新建第一个测试项目"><span class="nav-number">7.</span> <span class="nav-text">7、新建第一个测试项目</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Johnson</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn" rel="noopener" target="_blank">浙ICP备2020040953号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Johnson</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
